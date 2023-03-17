@@ -5,8 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
-import { AddTransitionComponent } from './add-transition/add-transition.component';
-import { AddStatusComponent } from './add-status/add-status.component';
+import { AddTransitionComponent } from './components/add-transition/add-transition.component';
+import { AddStatusComponent } from './components/add-status/add-status.component';
 
 @NgModule({
   declarations: [
