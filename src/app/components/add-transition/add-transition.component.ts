@@ -17,7 +17,7 @@ export class AddTransitionComponent {
     this.status = [];
   }
 
-  AddElement() {
+  AddStatus() {
     this.statu = new Statu(crypto.randomUUID(), 200, 200, '#ff0000');
     this.status.push(this.statu);
   }

@@ -4,7 +4,7 @@ import {
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
-import { Status } from 'src/model/status.model';
+import { Statu } from 'src/model/statu.model';
 
 @Component({
   selector: 'add-status',
@@ -30,7 +30,7 @@ export class AddStatusComponent {
 export class StatusDialog {
   constructor(
     public dialogRef: MatDialogRef<StatusDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: Status
+    @Inject(MAT_DIALOG_DATA) public data: Statu
   ) {}
 
   onNoClick(): void {
