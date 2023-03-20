@@ -12,18 +12,15 @@ export class AddTransitionComponent {
 
   statu: Statu;
   status: Statu[];
+  start: any;
+  end: any;
 
-  ngOnInit(){
+  ngOnInit() {
     this.status = [];
   }
 
   AddStatus() {
     this.statu = new Statu(crypto.randomUUID(), 200, 200, '#ff0000');
     this.status.push(this.statu);
-  }
-
-  Line(i: any) {
-    let status = this._elements.toArray();
-
   }
 }
