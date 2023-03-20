@@ -2,10 +2,10 @@
 <div mat-dialog-content>
   <mat-form-field appearance="fill">
     <mat-label></mat-label>
-    <input matInput [(ngModel)]="data.animal">
+    <input matInput [(ngModel)]="data.id">
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+  <button mat-button [mat-dialog-close]="data.bgColor" cdkFocusInitial>Ok</button>
 </div>
