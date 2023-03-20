@@ -1,1 +1,14 @@
-<p>add-transition works!</p>
+<button (click)="AddElement()">Add Element</button>
+
+<div
+  #statu
+  cdkDrag
+  [id]="statu.id"
+  *ngFor="let statu of status; let i = index"
+  [style.background]="statu.bgColor"
+  [style.width.px]="statu.width"
+  [style.height.px]="statu.height"
+  (click)="Line(i)"
+>
+  <span>Element {{ i }}</span>
+</div>
