@@ -1,10 +1,17 @@
-import { Component, Inject } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  Inject,
+  QueryList,
+  ViewChildren,
+} from '@angular/core';
 import {
   MatDialog,
   MAT_DIALOG_DATA,
   MatDialogRef,
 } from '@angular/material/dialog';
 import { Statu } from 'src/model/statu.model';
+import { StatuService } from 'src/services/statu.service';
 
 @Component({
   selector: 'add-status',
@@ -12,14 +19,82 @@ import { Statu } from 'src/model/statu.model';
   styleUrls: ['./add-status.component.scss'],
 })
 export class AddStatusComponent {
-  constructor(public dialog: MatDialog) {}
+  @ViewChildren('statu') _status: QueryList<ElementRef>;
+  status: Statu[];
+  statu: Statu;
+  width: any;
+  height: any;
+  bgColor: any;
+  name: any;
+  inDots: any;
+  outDots: any;
 
-  addStatus(): void {
+  constructor(public dialog: MatDialog, public service: StatuService) {}
+
+  ngOnInit() {
+    this.status = [];
+  }
+
+  AddStatu(): void {
     const dialogRef = this.dialog.open(StatusDialog, {
-      data: {},
+      data: {
+        width: this.width,
+        height: this.height,
+        bgColor: this.bgColor,
+      },
     });
 
-    dialogRef.afterClosed().subscribe((result) => {});
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result != undefined || null || '') {
+        switch (result.bgColor) {
+          case 'acik':
+            result.bgColor = '#dfe1e6';
+            this.name = 'Açık';
+            break;
+          case 'progress':
+            result.bgColor = '#0052cc';
+            this.name = 'Yapılıyor';
+            break;
+          case 'done':
+            result.bgColor = '#00875a';
+            this.name = 'Tamamlandı';
+            break;
+          default:
+            break;
+        }
+        this.statu = new Statu(
+          crypto.randomUUID(),
+          this.name,
+          result.width,
+          result.height,
+          result.bgColor
+        );
+        this.status.push(this.statu);
+      } else {
+        return;
+      }
+    });
+  }
+
+  SelectStatu(i: any) {
+    this.service.index = i;
+    const _status = this._status.toArray();
+    this.service.Line(_status[i].nativeElement);
+  }
+
+  onDragging() {
+    if (this.service.line != undefined || null || '') {
+      this.service.line.position();
+    }
+  }
+
+  RemoveStatu() {
+    if (this.service.index != undefined || null || '') {
+      this.status.splice(this.service.index, 1);
+      this.service.index = null;
+    } else {
+      alert('Lütfen düzenlemek istedğiniz elementi seçiniz.');
+    }
   }
 }
 
@@ -28,6 +103,12 @@ export class AddStatusComponent {
   templateUrl: 'status-dialog.html',
 })
 export class StatusDialog {
+  bgs = [
+    { value: 'acik', viewValue: 'Açık' },
+    { value: 'progress', viewValue: 'Yapılıyor' },
+    { value: 'done', viewValue: 'Tamamlandı' },
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<StatusDialog>,
     @Inject(MAT_DIALOG_DATA) public data: Statu
@@ -37,7 +118,3 @@ export class StatusDialog {
     this.dialogRef.close();
   }
 }
-
-/**  Copyright 2023 Google LLC. All Rights Reserved.
-    Use of this source code is governed by an MIT-style license that
-    can be found in the LICENSE file at https://angular.io/license */
