@@ -26,6 +26,8 @@ export class AddTransitionComponent {
         this.service.line.color = 'black';
         this.service.line.size = 3;
       } else {
+        this.start = '';
+        this.end = '';
         return;
       }
     } else {
