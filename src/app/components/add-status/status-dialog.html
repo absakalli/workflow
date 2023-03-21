@@ -1,11 +1,31 @@
-<h1 mat-dialog-title></h1>
 <div mat-dialog-content>
   <mat-form-field appearance="fill">
-    <mat-label></mat-label>
-    <input matInput [(ngModel)]="data.id">
+    <mat-label>Width</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.width"
+      required /></mat-form-field
+  ><br />
+  <mat-form-field appearance="fill">
+    <mat-label>Height</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.height"
+      required
+    /> </mat-form-field
+  ><br />
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="data.bgColor" name="status" required>
+      <mat-option *ngFor="let bg of bgs" [value]="bg.value" name="status">
+        {{ bg.viewValue }}
+      </mat-option>
+    </mat-select>
   </mat-form-field>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.bgColor" cdkFocusInitial>Ok</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Add</button>
 </div>

@@ -1,1 +1,24 @@
-<button mat-raised-button (click)="addStatus()">Add Status</button>
+<button mat-raised-button (click)="AddStatu()">Add Statu</button>
+<button mat-raised-button (click)="RemoveStatu()">Remove Statu</button>
+<div
+  #statu
+  cdkDrag
+  class="card"
+  [id]="statu.id"
+  *ngFor="let statu of status; let i = index"
+  [style.background]="statu.bgColor"
+  [style.width.px]="statu.width"
+  [style.height.px]="statu.height"
+  (click)="SelectStatu(i)"
+  (cdkDragMoved)="onDragging()"
+>
+  <div
+    [id]="statu.id.toString() + '-0' + k"
+    *ngFor="let inDot of inDots; let k = index"
+  ></div>
+  <div
+    [id]="statu.id.toString() + '-00' + l"
+    *ngFor="let outDot of outDots; let l = index"
+  ></div>
+  <span>{{ statu.name }}</span>
+</div>
