@@ -28,8 +28,8 @@ export class AddStatusComponent {
   height: any;
   bgColor: any;
   name: any;
-  inDots: any;
-  outDots: any;
+  input: any;
+  output: any;
 
   constructor(public dialog: MatDialog, public service: StatuService) {
     this.transition = new AddTransitionComponent(service);
@@ -44,6 +44,8 @@ export class AddStatusComponent {
       data: {
         width: this.width,
         height: this.height,
+        input: this.input,
+        output: this.output,
         bgColor: this.bgColor,
       },
     });
@@ -71,7 +73,9 @@ export class AddStatusComponent {
           this.name,
           result.width,
           result.height,
-          result.bgColor
+          result.input,
+          result.output,
+          result.bgColor,
         );
         this.status.push(this.statu);
       } else {

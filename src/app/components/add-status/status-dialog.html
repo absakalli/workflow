@@ -16,6 +16,24 @@
       required
     /> </mat-form-field
   ><br />
+  <mat-form-field appearance="fill">
+    <mat-label>Input Count</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.input"
+      required
+    /> </mat-form-field
+  ><br />
+  <mat-form-field appearance="fill">
+    <mat-label>Output Count</mat-label>
+    <input
+      type="number"
+      matInput
+      [(ngModel)]="data.output"
+      required
+    /> </mat-form-field
+  ><br />
   <mat-form-field>
     <mat-label>Status</mat-label>
     <mat-select [(ngModel)]="data.bgColor" name="status" required>

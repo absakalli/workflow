@@ -6,19 +6,21 @@
   class="card"
   [id]="statu.id"
   *ngFor="let statu of status; let i = index"
-  [style.background]="statu.bgColor"
-  [style.width.px]="statu.width"
-  [style.height.px]="statu.height"
+  [style.--color]="statu.bgColor"
+  [style.--width.px]="statu.width"
+  [style.--height.px]="statu.height"
   (click)="SelectStatu(i)"
   (cdkDragMoved)="onDragging()"
 >
   <div
     [id]="statu.id.toString() + '-0' + k"
-    *ngFor="let inDot of inDots; let k = index"
+    class="io"
+    *ngFor="let inp of [].constructor(statu.input); let k = index"
   ></div>
   <div
     [id]="statu.id.toString() + '-00' + l"
-    *ngFor="let outDot of outDots; let l = index"
+    class="io"
+    *ngFor="let out of [].constructor(statu.output); let l = index"
   ></div>
   <span>{{ statu.name }}</span>
 </div>
