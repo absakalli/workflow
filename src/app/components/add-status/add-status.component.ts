@@ -12,6 +12,7 @@ import {
 } from '@angular/material/dialog';
 import { Statu } from 'src/model/statu.model';
 import { StatuService } from 'src/services/statu.service';
+import { AddTransitionComponent } from '../add-transition/add-transition.component';
 
 @Component({
   selector: 'add-status',
@@ -20,6 +21,7 @@ import { StatuService } from 'src/services/statu.service';
 })
 export class AddStatusComponent {
   @ViewChildren('statu') _status: QueryList<ElementRef>;
+  transition: AddTransitionComponent;
   status: Statu[];
   statu: Statu;
   width: any;
@@ -29,7 +31,9 @@ export class AddStatusComponent {
   inDots: any;
   outDots: any;
 
-  constructor(public dialog: MatDialog, public service: StatuService) {}
+  constructor(public dialog: MatDialog, public service: StatuService) {
+    this.transition = new AddTransitionComponent(service);
+  }
 
   ngOnInit() {
     this.status = [];
@@ -79,7 +83,7 @@ export class AddStatusComponent {
   SelectStatu(i: any) {
     this.service.index = i;
     const _status = this._status.toArray();
-    this.service.Line(_status[i].nativeElement);
+    this.transition.Line(_status[i].nativeElement);
   }
 
   onDragging() {
