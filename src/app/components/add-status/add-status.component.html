@@ -13,14 +13,22 @@
   (cdkDragMoved)="onDragging()"
 >
   <div
+    #input
     [id]="statu.id.toString() + '-0' + k"
-    class="io"
+    class="io in"
     *ngFor="let inp of [].constructor(statu.input); let k = index"
+    [style.--k]="k"
+    [style.--input]="statu.input"
+    (click)="SelectConnDot(k, null, $event)"
   ></div>
   <div
+    #output
     [id]="statu.id.toString() + '-00' + l"
-    class="io"
+    class="io out"
     *ngFor="let out of [].constructor(statu.output); let l = index"
+    [style.--l]="l"
+    [style.--output]="statu.output"
+    (click)="SelectConnDot(null, l, $event)"
   ></div>
   <span>{{ statu.name }}</span>
 </div>

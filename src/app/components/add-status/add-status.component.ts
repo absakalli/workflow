@@ -21,6 +21,8 @@ import { AddTransitionComponent } from '../add-transition/add-transition.compone
 })
 export class AddStatusComponent {
   @ViewChildren('statu') _status: QueryList<ElementRef>;
+  @ViewChildren('input') _inputs: QueryList<ElementRef>;
+  @ViewChildren('output') _outputs: QueryList<ElementRef>;
   transition: AddTransitionComponent;
   status: Statu[];
   statu: Statu;
@@ -52,48 +54,59 @@ export class AddStatusComponent {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result != undefined || null || '') {
-        switch (result.bgColor) {
-          case 'acik':
-            result.bgColor = '#dfe1e6';
-            this.name = 'Açık';
-            break;
-          case 'progress':
-            result.bgColor = '#0052cc';
-            this.name = 'Yapılıyor';
-            break;
-          case 'done':
-            result.bgColor = '#00875a';
-            this.name = 'Tamamlandı';
-            break;
-          default:
-            break;
+        if (
+          (result &&
+            result.width &&
+            result.height &&
+            result.input &&
+            result.output &&
+            result.bgColor) != undefined ||
+          null ||
+          ''
+        ) {
+          switch (result.bgColor) {
+            case 'acik':
+              result.bgColor = '#dfe1e6';
+              this.name = 'Açık';
+              break;
+            case 'progress':
+              result.bgColor = '#0052cc';
+              this.name = 'Yapılıyor';
+              break;
+            case 'done':
+              result.bgColor = '#00875a';
+              this.name = 'Tamamlandı';
+              break;
+            default:
+              break;
+          }
+          this.statu = new Statu(
+            crypto.randomUUID(),
+            this.name,
+            result.width,
+            result.height,
+            result.input,
+            result.output,
+            result.bgColor
+          );
+          this.status.push(this.statu);
+        } else {
+          alert('Lütfen zorunlu alanları doldurunuz.');
+          return this.AddStatu();
         }
-        this.statu = new Statu(
-          crypto.randomUUID(),
-          this.name,
-          result.width,
-          result.height,
-          result.input,
-          result.output,
-          result.bgColor,
-        );
-        this.status.push(this.statu);
-      } else {
-        return;
       }
     });
   }
 
   SelectStatu(i: any) {
     this.service.index = i;
-    const _status = this._status.toArray();
-    this.transition.Line(_status[i].nativeElement);
   }
 
-  onDragging() {
-    if (this.service.line != undefined || null || '') {
-      this.service.line.position();
-    }
+  SelectConnDot(k: any, l: any, event: any) {
+    const _inputs = this._inputs.toArray();
+    const _outputs = this._outputs.toArray();
+    this.transition.Line(event.target);
+    // this.transition.Line(_outputs[l].nativeElement);
   }
 
   RemoveStatu() {
@@ -102,6 +115,12 @@ export class AddStatusComponent {
       this.service.index = null;
     } else {
       alert('Lütfen düzenlemek istedğiniz elementi seçiniz.');
+    }
+  }
+
+  onDragging() {
+    if (this.service.line != undefined || null || '') {
+      this.service.line.position();
     }
   }
 }

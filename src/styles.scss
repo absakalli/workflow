@@ -5,3 +5,11 @@ svg.leader-line path {
 .leader-line:hover g > use:first-of-type {
   stroke: gray !important;
 }
+
+input::placeholder{
+  font-size: 12px;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  display: none;
+}

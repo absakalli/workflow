@@ -1,10 +1,51 @@
 .card {
+  width: var(--width);
+  height: var(--height);
+  background-color: var(--color);
   position: absolute;
   display: inline-grid;
   text-align: center;
   align-items: center;
 }
+
 .card:hover {
-  box-shadow: 0 8px 50px #23232333;
-  border: 1px solid black;
+  box-shadow: 0 8px 20px #77777777;
+}
+
+.io {
+  --dotSize: calc(var(--height) / 10);
+  width: var(--dotSize);
+  height: var(--dotSize);
+  position: absolute;
+  border-radius: 50%;
+  opacity: 85%;
+}
+
+.io:hover {
+  opacity: 100%;
+  border: 1px solid red;
+}
+
+.io.in {
+  background-color: black;
+  top: calc(
+    (
+        ((var(--height) - (var(--dotSize) * var(--input))) / (var(--input) + 1)) *
+          (var(--k) + 1)
+      ) + (var(--dotSize) * var(--k))
+  );
+  left: calc((var(--height) / 20) * -1);
+}
+
+.io.out {
+  background-color: white;
+  top: calc(
+    (
+        (
+            (var(--height) - (var(--dotSize) * var(--output))) /
+              (var(--output) + 1)
+          ) * (var(--l) + 1)
+      ) + (var(--dotSize) * var(--l))
+  );
+  right: calc((var(--height) / 20) * -1);
 }
