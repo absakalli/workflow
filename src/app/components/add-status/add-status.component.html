@@ -19,7 +19,7 @@
     *ngFor="let inp of [].constructor(statu.input); let k = index"
     [style.--k]="k"
     [style.--input]="statu.input"
-    (click)="SelectConnDot(k, null, $event)"
+    (click)="SelectConnDot(i, $event)"
   ></div>
   <div
     #output
@@ -28,7 +28,7 @@
     *ngFor="let out of [].constructor(statu.output); let l = index"
     [style.--l]="l"
     [style.--output]="statu.output"
-    (click)="SelectConnDot(null, l, $event)"
+    (click)="SelectConnDot(i, $event)"
   ></div>
   <span>{{ statu.name }}</span>
 </div>
