@@ -11,7 +11,6 @@ import {
   MatDialogRef,
 } from '@angular/material/dialog';
 import { Statu } from 'src/model/statu.model';
-import { StatuService } from 'src/services/statu.service';
 import { AddTransitionComponent } from '../add-transition/add-transition.component';
 
 @Component({
@@ -21,11 +20,10 @@ import { AddTransitionComponent } from '../add-transition/add-transition.compone
 })
 export class AddStatusComponent {
   @ViewChildren('statu') _status: QueryList<ElementRef>;
-  @ViewChildren('input') _inputs: QueryList<ElementRef>;
-  @ViewChildren('output') _outputs: QueryList<ElementRef>;
   transition: AddTransitionComponent;
   status: Statu[];
   statu: Statu;
+  index: any;
   width: any;
   height: any;
   bgColor: any;
@@ -33,8 +31,8 @@ export class AddStatusComponent {
   input: any;
   output: any;
 
-  constructor(public dialog: MatDialog, public service: StatuService) {
-    this.transition = new AddTransitionComponent(service);
+  constructor(public dialog: MatDialog) {
+    this.transition = new AddTransitionComponent();
   }
 
   ngOnInit() {
@@ -99,28 +97,30 @@ export class AddStatusComponent {
   }
 
   SelectStatu(i: any) {
-    this.service.index = i;
+    this.index = i;
   }
 
   SelectConnDot(k: any, l: any, event: any) {
-    const _inputs = this._inputs.toArray();
-    const _outputs = this._outputs.toArray();
-    this.transition.Line(event.target);
-    // this.transition.Line(_outputs[l].nativeElement);
+    if (event.target.className.includes(' out ')) {
+      this.transition.start = event.target;
+    } else if (event.target.className.includes(' in ')) {
+      this.transition.end = event.target;
+    }
+    this.transition.Line();
   }
 
   RemoveStatu() {
-    if (this.service.index != undefined || null || '') {
-      this.status.splice(this.service.index, 1);
-      this.service.index = null;
+    if (this.index != undefined || null || '') {
+      this.status.splice(this.index, 1);
+      this.index = null;
     } else {
       alert('Lütfen düzenlemek istedğiniz elementi seçiniz.');
     }
   }
 
   onDragging() {
-    if (this.service.line != undefined || null || '') {
-      this.service.line.position();
+    if (this.transition.line != undefined || null || '') {
+      this.transition.line.position();
     }
   }
 }

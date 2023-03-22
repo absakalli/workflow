@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { StatuService } from 'src/services/statu.service';
 import * as LeaderLine from 'leader-line-new';
 
 @Component({
@@ -10,28 +9,27 @@ import * as LeaderLine from 'leader-line-new';
 export class AddTransitionComponent {
   start: any;
   end: any;
+  line: any;
+  lines: any[];
 
-  constructor(public service: StatuService) {}
+  constructor() {}
 
-  Line(statu: any) {
-    if (!this.start) {
-      this.start = statu;
-    } else if (!this.end) {
-      this.end = statu;
-      if (this.end != this.start) {
-        this.service.line = new LeaderLine(this.start, this.end);
-        this.service.line.startPlug = 'disc';
-        this.service.line.endPlug = 'arrow2';
-        this.service.line.middleLabel = 'Transition';
-        this.service.line.color = 'black';
-        this.service.line.size = 3;
-      } else {
-        this.start = '';
-        this.end = '';
-        return;
-      }
-    } else {
-      return;
+  ngOnInit() {
+    this.lines = [];
+  }
+
+  Line() {
+    if (this.start && this.end && this.start != this.end) {
+      this.line = new LeaderLine(this.start, this.end);
+      this.line.path = 'grid';
+      this.line.startPlug = 'disc';
+      this.line.startSocket = 'right';
+      this.line.endPlug = 'arrow2';
+      this.line.endSocket = 'left';
+      this.line.color = 'black';
+      this.line.size = 3;
+      this.lines.push(this.line);
+      console.log(this.lines);
     }
   }
 }
