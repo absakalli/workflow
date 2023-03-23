@@ -5,11 +5,12 @@
   cdkDrag
   class="card"
   [id]="statu.id"
-  *ngFor="let statu of status; let i = index"
+  *ngFor="let statu of status; let i = index;"
   [style.--color]="statu.bgColor"
   [style.--width.px]="statu.width"
   [style.--height.px]="statu.height"
-  (click)="SelectStatu(i)"
+  (mousedown)="SelectStatu(i)"
+  (mouseup)="SelectStatu(i)"
   (cdkDragMoved)="onDragging()"
 >
   <div
