@@ -88,6 +88,7 @@ export class AddStatusComponent {
             result.bgColor
           );
           this.status.push(this.statu);
+          this.transition.connection.push([this.statu]);
         } else {
           alert('Lütfen zorunlu alanları doldurunuz.');
           return this.AddStatu();
@@ -100,18 +101,45 @@ export class AddStatusComponent {
     this.index = i;
   }
 
-  SelectConnDot(k: any, l: any, event: any) {
+  SelectConnDot(i: any, event: any) {
+    this.index = i;
     if (event.target.className.includes(' out ')) {
+      this.transition.startindex = this.index;
       this.transition.start = event.target;
-    } else if (event.target.className.includes(' in ')) {
+    } else if (
+      event.target.className.includes(' in ') &&
+      this.transition.start
+    ) {
+      this.transition.endindex = this.index;
       this.transition.end = event.target;
+      this.transition.Line();
+      this.transition.start = null;
+      this.transition.end = null;
+      this.transition.startindex = null;
+      this.transition.endindex = null;
+    } else {
+      alert('Lütfen önce çıkış elementini seçiniz.');
     }
-    this.transition.Line();
   }
 
   RemoveStatu() {
     if (this.index != undefined || null || '') {
+      for (let i = 1; i < this.transition.connection[this.index].length; i++) {
+        const line = this.transition.connection[this.index][i];
+        for (let k = 0; k < this.transition.connection.length; k++) {
+          for (let j = 1; j < this.transition.connection[k].length; j++) {
+            const element = this.transition.connection[k][j];
+            if (element == line) {
+              this.transition.connection[k][j] = undefined;
+            }
+          }
+        }
+        if (line) {
+          line.remove();
+        }
+      }
       this.status.splice(this.index, 1);
+      this.transition.connection.splice(this.index, 1);
       this.index = null;
     } else {
       alert('Lütfen düzenlemek istedğiniz elementi seçiniz.');
@@ -120,7 +148,12 @@ export class AddStatusComponent {
 
   onDragging() {
     if (this.transition.line != undefined || null || '') {
-      this.transition.line.position();
+      for (let i = 1; i < this.transition.connection[this.index].length; i++) {
+        const element = this.transition.connection[this.index][i];
+        if (element) {
+          element.position();
+        }
+      }
     }
   }
 }
