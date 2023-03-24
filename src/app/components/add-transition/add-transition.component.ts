@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import * as LeaderLine from 'leader-line-new';
-import { Statu } from 'src/model/statu.model';
 
 @Component({
   selector: 'add-transition',
@@ -21,6 +20,7 @@ export class AddTransitionComponent {
 
   Line() {
     this.line = new LeaderLine(this.start, this.end);
+    this.line.id = crypto.randomUUID();
     this.line.startPlug = 'disc';
     this.line.startSocket = 'right';
     this.line.endPlug = 'arrow2';
