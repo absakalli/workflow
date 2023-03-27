@@ -20,18 +20,31 @@ export class AddTransitionComponent {
 
   Line() {
     this.line = new LeaderLine(this.start, this.end);
-    this.line.id = crypto.randomUUID();
     this.line.startPlug = 'disc';
     this.line.startSocket = 'right';
     this.line.endPlug = 'arrow2';
     this.line.endSocket = 'left';
     this.line.color = 'black';
     this.line.size = 3;
+    
     if (this.startindex == this.endindex) {
       this.connection[this.startindex].push(this.line);
     } else {
       this.connection[this.startindex].push(this.line);
       this.connection[this.endindex].push(this.line);
     }
+
+    const lines = document.querySelectorAll('.leader-line');
+    const line = lines[lines.length - 1];
+    line.addEventListener(
+      'contextmenu',
+      function (event) {
+        if (confirm('Bağlatıyı silmek istediğinize emin misiniz?') == true) {
+          line.remove();
+        }
+        event.preventDefault();
+      },
+      false
+    );
   }
 }
