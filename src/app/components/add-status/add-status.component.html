@@ -22,7 +22,9 @@
     [style.--k]="k"
     [style.--input]="statu.input"
     (click)="SelectConnDot(i, $event)"
-  ><span class="dotType">{{dotType}}</span></div>
+  >
+    <span class="dotType">{{ dotType }}</span>
+  </div>
   <div
     #output
     class="io out"
@@ -32,6 +34,8 @@
     [style.--l]="l"
     [style.--output]="statu.output"
     (click)="SelectConnDot(i, $event)"
-  ><span class="dotType">{{dotType}}</span></div>
+  >
+    <span class="dotType">{{ dotType }}</span>
+  </div>
   <span>{{ statu.name }}</span>
 </div>
