@@ -30,6 +30,9 @@ export class AddStatusComponent {
   name: any;
   input: any;
   output: any;
+  dotType: any;
+  typeOut: any;
+  typeIn: any;
 
   constructor(public dialog: MatDialog) {
     this.transition = new AddTransitionComponent();
@@ -106,9 +109,11 @@ export class AddStatusComponent {
     if (event.target.className.includes(' out ')) {
       this.transition.startindex = this.index;
       this.transition.start = event.target;
+      this.typeOut = event.target.getAttribute('type');
     } else if (
       event.target.className.includes(' in ') &&
-      this.transition.start
+      this.transition.start &&
+      this.typeOut == event.target.getAttribute('type')
     ) {
       this.transition.endindex = this.index;
       this.transition.end = event.target;
@@ -118,7 +123,7 @@ export class AddStatusComponent {
       this.transition.startindex = null;
       this.transition.endindex = null;
     } else {
-      alert('Lütfen önce çıkış elementini seçiniz.');
+      alert('Lütfen elementleri doğru şekilde seçtiğinizden emin olunuz.');
     }
   }
 
