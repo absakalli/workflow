@@ -26,7 +26,7 @@ export class AddTransitionComponent {
     this.line.endSocket = 'left';
     this.line.color = 'black';
     this.line.size = 3;
-    
+
     if (this.startindex == this.endindex) {
       this.connection[this.startindex].push(this.line);
     } else {
@@ -40,7 +40,7 @@ export class AddTransitionComponent {
       'contextmenu',
       function (event) {
         if (confirm('Bağlatıyı silmek istediğinize emin misiniz?') == true) {
-          line.remove();
+          line.setAttribute('visibility', 'hidden');
         }
         event.preventDefault();
       },
