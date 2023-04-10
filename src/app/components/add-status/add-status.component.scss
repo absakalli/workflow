@@ -19,6 +19,9 @@
   position: absolute;
   border-radius: 50%;
   opacity: 85%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .io:hover {
@@ -48,4 +51,9 @@
       ) + (var(--dotSize) * var(--l))
   );
   right: calc((var(--height) / 20) * -1);
+}
+
+.dotType{  
+  color: white;
+  mix-blend-mode: difference;
 }
