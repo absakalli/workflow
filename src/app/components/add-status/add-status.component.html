@@ -4,7 +4,6 @@
   #statu
   cdkDrag
   class="card"
-  [id]="statu.id"
   *ngFor="let statu of status; let i = index"
   [style.--color]="statu.bgColor"
   [style.--width.px]="statu.width"
@@ -18,24 +17,24 @@
     class="io in"
     *ngFor="let inp of [].constructor(statu.input); let k = index"
     [id]="statu.id.toString() + '-0' + k"
-    [attr.type]=""
+    [attr.type]="k"
     [style.--k]="k"
     [style.--input]="statu.input"
     (click)="SelectConnDot(i, $event)"
   >
-    <span class="dotType">{{ dotType }}</span>
+    {{ k }}
   </div>
   <div
     #output
     class="io out"
     *ngFor="let out of [].constructor(statu.output); let l = index"
     [id]="statu.id.toString() + '-00' + l"
-    [attr.type]=""
+    [attr.type]="l"
     [style.--l]="l"
     [style.--output]="statu.output"
     (click)="SelectConnDot(i, $event)"
   >
-    <span class="dotType">{{ dotType }}</span>
+    {{ l }}
   </div>
   <span>{{ statu.name }}</span>
 </div>

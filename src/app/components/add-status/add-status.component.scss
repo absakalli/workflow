@@ -30,7 +30,7 @@
 }
 
 .io.in {
-  background-color: black;
+  background-color: yellowgreen;
   top: calc(
     (
         ((var(--height) - (var(--dotSize) * var(--input))) / (var(--input) + 1)) *
@@ -51,9 +51,4 @@
       ) + (var(--dotSize) * var(--l))
   );
   right: calc((var(--height) / 20) * -1);
-}
-
-.dotType{  
-  color: white;
-  mix-blend-mode: difference;
 }

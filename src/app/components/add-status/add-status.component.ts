@@ -30,7 +30,6 @@ export class AddStatusComponent {
   name: any;
   input: any;
   output: any;
-  dotType: any;
   typeOut: any;
   typeIn: any;
 
